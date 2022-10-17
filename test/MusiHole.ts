@@ -12,9 +12,8 @@ describe("Music Hole NFT Contract", function () {
 
     const name = "Music Hole";
     const symbol = "MH";
-    // const uri = "bafybeif5ik6adva4tijjvqdfcgwx24v5gwpoothduxbucotsvzjcx4lroq/metatada.json";
-    const metadataContent = fs.readFileSync(__dirname + "/metadata-final.json", {encoding:'utf8', flag:'r'});
-    const royalties = 8 * 100; // 8% resale rights
+    const metadataContent = fs.readFileSync(__dirname + "/metadata.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
+    const royalties = 10 * 100; // 10% resale rights
     const price:any = ethers.utils.parseEther('1') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
 
     // Create instance of Ato.sol
