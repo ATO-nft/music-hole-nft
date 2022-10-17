@@ -75,5 +75,78 @@
             "right":"merchandisingRights",
             "value":"false"
         }
+          {
+            "trait_type":"BLOCKCHAIN DISTRIBUTION",
+            "value":"Jungle Fever"
+        }
+  {
+            "trait_type":"CATEGORY",
+            "value":"Feature Film"
+        }
+{
+            "trait_type":"COUNTRY OF PRODUCTION",
+            "value":"Belgium"
+        }
+{
+            "trait_type":"COUNTRY OF PRODUCTION",
+            "value":"France"
+        }
+{
+            "trait_type":"DIRECTOR",
+            "value":"Gaetan Liekens"
+        }
+{
+            "trait_type":"DIRECTOR",
+            "value":"David Mutzenmacher"
+        }
+{
+            "trait_type":"DURATION IN MINUTES",
+            "value":"80"
+        }
+{
+            "trait_type":"FIRST RELEASE",
+            "value":"2022"
+        }
+{
+            "trait_type":"GENRE",
+            "value":"Dark Comedy"
+        }
+{
+            "trait_type":"LICENSE",
+            "value":""
+        }
+{
+            "trait_type":"MINTED BY",
+            "value":"āto"
+        }
+{
+            "trait_type":"ORIGINAL LANGUAGE",
+            "value":"French"
+        }
+{
+            "trait_type":"PRODUCER",
+            "value":"Rockstone"
+        }
+{
+            "trait_type":"PRODUCER",
+            "value":"Elgolive"
+        }
+{
+            "trait_type":"PRODUCER",
+            "value":"Luc Bessson"
+        }
+{
+            "trait_type":"PRODUCER",
+            "value":"Swisskiss"
+        }
+{
+            "trait_type":"CAST",
+            "value":"Vanessa Guide"
+        }
+{
+            "trait_type":"CAST",
+            "value":"Wim Willaert"
+        }
+
     ]
  }
