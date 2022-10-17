@@ -7,9 +7,10 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import './ERC2981ContractWideRoyalties.sol';
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 /// @title Music Hole NFT contract
-contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981ContractWideRoyalties {
+contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981ContractWideRoyalties, ReentrancyGuard {
 
 	using Counters for Counters.Counter;
 	Counters.Counter private _tokenIdCounter;
@@ -22,7 +23,7 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 	/// @param _symbol symbol of ERC-721 token
 	/// @param _uri metadata of NFT when redeeemable
 	/// @param _royalties resale rights percentage (using 2 decimals: 10000 = 100%, 150 = 1.5%, 0 = 0%)
-	/// @param _price price per mint
+	/// @param _price price per mint (in wei)
 	constructor(
 		string memory _name,
 		string memory _symbol,
@@ -37,6 +38,14 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 		setPrice(_price);
 	}
 
+	receive() external payable {
+		require(false, "CANNOT_DIRECTLY_SEND_ANY_VALUE");
+	}
+
+	fallback() external payable {
+		require(false, "CANNOT_DIRECTLY_SEND_ANY_DATA");
+	}
+
 	function totalSupply()
 		public
 		view
@@ -49,11 +58,13 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 	function mint()
 		payable
 		public
+		nonReentrant
 	{
 		require(msg.value == price, "MSG_VALUE_DOES_NOT_MATCH_PRICE");
 		_tokenIdCounter.increment();
 		_safeMint(msg.sender, _tokenIdCounter.current());
 		_setTokenURI(_tokenIdCounter.current(), uri);
+		payable(owner()).transfer(msg.value);
 	}
 
 	/// @notice only owner can mint without paying
@@ -68,6 +79,7 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 	}
 
 	/// @notice mint NFT
+	/// @param _price price per mint (in wei)
 	function setPrice(uint _price)
 		payable
 		public
