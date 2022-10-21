@@ -18,10 +18,8 @@ async function main() {
   var msg = color.xterm(39).bgXterm(128);
   console.log("NFT contract deployed. ✅", msg(mh.address))
 
-  // const addr = "0x0F7CF76d81b9d6984dd43b25cD14253cAB48783d"
-
   // Etherscan verification
-  // await mh.deployTransaction.wait(6)
+  await mh.deployTransaction.wait(6)
   await hre.run("verify:verify", { network: "goerli", address: mh.address, constructorArguments: [name, symbol, metadataContent, royalties, price], });
   console.log("Etherscan verification done. ✅")
   
