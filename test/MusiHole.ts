@@ -70,5 +70,10 @@ describe("Music Hole NFT Contract", function () {
       expect(await ethers.provider.getBalance(acquirer.address)).to.lte(BigInt(acquirerBal) - BigInt(price));
       expect(await ethers.provider.getBalance(issuer.address)).to.be.equal(BigInt(issuerBal) + BigInt(price));
     });
+    it("Should let issuer mint 2 NFTs for free", async function () {
+      const { mh, issuer } = await loadFixture(deployContractsFixture);
+      await mh.connect(issuer).adminMint(2);
+      expect(await mh.balanceOf(issuer.address)).to.be.equal(2);
+    });
   });
 });
