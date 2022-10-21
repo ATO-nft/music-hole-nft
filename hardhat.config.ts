@@ -13,11 +13,11 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    // polygon: {
-    //   url: process.env.POLYGON_URL || "",
-    //   accounts:
-    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    // },
+    mainnet: {
+      url: process.env.MAINNET_URL || "",
+      accounts:
+        process.env.MAINNET_PRIVATE_KEY !== undefined ? [process.env.MAINNET_PRIVATE_KEY] : [],
+    },
   }, 
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
