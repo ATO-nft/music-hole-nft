@@ -60,7 +60,7 @@ describe("Music Hole NFT Contract", function () {
       const newPrice:any = ethers.utils.parseEther('2')
       await mh.connect(issuer).setPrice(newPrice);
       expect(await mh.price()).to.be.equal("2000000000000000000");
-      expect(mh.connect(acquirer).setPrice()).to.be.reverted;
+      expect(mh.connect(acquirer).setPrice(ethers.utils.parseEther('0.0001'))).to.be.reverted;
     });
     it("Should receive ETH", async function () {
       const { mh, issuer, acquirer, price } = await loadFixture(deployContractsFixture);
@@ -70,10 +70,11 @@ describe("Music Hole NFT Contract", function () {
       expect(await ethers.provider.getBalance(acquirer.address)).to.lte(BigInt(acquirerBal) - BigInt(price));
       expect(await ethers.provider.getBalance(issuer.address)).to.be.equal(BigInt(issuerBal) + BigInt(price));
     });
-    it("Should let issuer mint 2 NFTs for free", async function () {
-      const { mh, issuer } = await loadFixture(deployContractsFixture);
+    it("Should let issuer mint 2 NFTs", async function () {
+      const { mh, issuer, price } = await loadFixture(deployContractsFixture);
       await mh.connect(issuer).adminMint(2);
       expect(await mh.balanceOf(issuer.address)).to.be.equal(2);
+      expect(mh.connect(issuer).adminMint(2,{value: ethers.utils.parseEther('1')})).to.be.revertedWith('CANNOT_SEND_ANY_VALUE');
     });
   });
 });

@@ -73,8 +73,9 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 		public
 		onlyOwner
 	{
-		for(uint256 i = 0 ; i < _amount ; i++ ) 
+		for(uint256 i=0 ; i<_amount ; i++) 
 		{
+			require(msg.value == 0, "CANNOT_SEND_ANY_VALUE");
 			_tokenIdCounter.increment();
 			_safeMint(msg.sender, _tokenIdCounter.current());
 			_setTokenURI(_tokenIdCounter.current(), uri);
