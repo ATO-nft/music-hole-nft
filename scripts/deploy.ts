@@ -1,38 +1,33 @@
 import { ethers } from "hardhat";
 const hre = require("hardhat");
-// import { handleStorage } from "../metadata/handleStorage"
 const color = require("cli-color")
+import fs from 'fs';
 
 async function main() {
 
-  ///// Edit this part to config your NFT. /////
-  const mediaFileName = "thistle-black-pixel.jpg" // replace with your own media file name
-  const licenseFileName = "thistle-test-IP-license.pdf" // replace with your own license file name
-  const author = "Julien"
-  const name = "Jungle fever #1"
-  const symbol = "JUNGLE"
-  const description = "I've got jungle fever, she's got jungle fever // We've got jungle fever, we're in love"
-  const mint = 42 // number of editions
-  const royalties = 8 * 100 // 8%
+  const name = "Music Hole";
+  const symbol = "MH";
+  const metadataContent = fs.readFileSync(__dirname + "/metatest.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
+  const royalties = 10 * 100; // 10% resale rights
+  const price:any = ethers.utils.parseEther('1') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
 
-  // nft metadata storage
-  // const uri = await handleStorage(name, author, description, mediaFileName, licenseFileName)
+  // const MusicHole = await ethers.getContractFactory("MusicHole");
+  // const mh = await MusicHole.deploy(name, symbol, metadataContent, royalties, price);
+  // await mh.deployed();
 
-  // deploy NFT contract
-  const Ato = await ethers.getContractFactory("Ato")
-  const ato = await Ato.deploy(name, symbol, mint, "yo", royalties)
-  await ato.deployed();
-  var msg = color.xterm(39).bgXterm(128);
-  console.log("NFT contract deployed. ✅", msg(ato.address))
+  // var msg = color.xterm(39).bgXterm(128);
+  // console.log("NFT contract deployed. ✅", msg(mh.address))
+
+  // const addr = "0x0F7CF76d81b9d6984dd43b25cD14253cAB48783d"
 
   // Etherscan verification
-  //await ato.deployTransaction.wait(6)
-  //await hre.run("verify:verify", { network: "goerli", address: ato.address, constructorArguments: [name, symbol, mint, uri, royalties], });
+  // await mh.deployTransaction.wait(6)
+  await hre.run("verify:verify", { network: "goerli", address: addr, constructorArguments: [name, symbol, metadataContent, royalties, price], });
   console.log("Etherscan verification done. ✅")
-  console.log("Source code: https://goerli.etherscan.io/address/" + ato.address + "#code")
-  console.log("https://ato.network/Goerli/" + ato.address + "/1")
+  
+  console.log("Source code: https://goerli.etherscan.io/address/" + mh.address + "#code")
+  console.log("https://ato.network/Goerli/" + mh.address + "/1")
   //console.log("OpenSea URL: " + "https://testnets.opensea.io/asset/goerli/" + ato.address + "/1")
-  console.log("Thanks for using Āto!")
 }
 
 main().catch((error) => {

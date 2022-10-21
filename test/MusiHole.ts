@@ -39,7 +39,7 @@ describe("Music Hole NFT Contract", function () {
     });
     it("Should revert if not contract owner", async function () {
       const { mh, acquirer } = await loadFixture(deployContractsFixture);
-      expect(mh.connect(acquirer).adminMint()).to.be.revertedWith("Ownable: caller is not the owner");
+      expect(mh.connect(acquirer).adminMint(2)).to.be.revertedWith("Ownable: caller is not the owner");
     });
     it("Should revert if direct send", async function () {
       const { mh, acquirer } = await loadFixture(deployContractsFixture);
