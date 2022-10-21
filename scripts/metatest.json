@@ -1,3 +1,143 @@
 {
-    "name":"test"
-}
+    "name":"Thistle Fever (2042)",
+    "author":"Thistle Fever",
+    "description":"Storyline : it's the story of a thistle. I love thistles.",
+    "image":"https://ipfs.io/ipfs/bafybeibghsiwvatdc67ow5vkqxbnm775dcralexliakwi6st5rln7xi7c4/thistle-black-pixel.png",
+    "license":"没有",
+    "attributes":[
+        {
+            "trait_type":"~ Resale rights (%)",
+            "value":"8"
+        },
+        {
+            "trait_type":"~ Minted by",
+            "value":"Āto"
+        },
+        {
+            "trait_type":"~ IP License",
+            "value":"https://something"
+        },
+        {
+            "trait_type":"~ Exclusivity",
+            "value":"false"
+        },
+        {
+            "trait_type":"~ Private Use",
+            "value":"true"
+        },
+        {
+            "trait_type":"~ Display on marketplaces",
+            "value":"true"
+        },
+        {
+            "trait_type":"~ Display on every media (non commercial)",
+            "value":"true"
+        },
+        {
+            "trait_type":"~ Right to adapt",
+            "value":"false"
+        },
+        {
+            "trait_type":"~ Right to add a logo",
+            "value":"false"
+        },
+        {
+            "trait_type":"~ Merchandising rights",
+            "value":"false"
+        },
+        {
+            "trait_type":"Distribution",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Category",
+            "value":"Geek"
+        },
+        {
+            "trait_type":"Country of production",
+            "value":"North Korea"
+        },
+        {
+            "trait_type":"Director #1",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Director #2",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Duration",
+            "value":"2800 minutes"
+        },
+        {
+            "trait_type":"First realease",
+            "value":"2042"
+        },
+        {
+            "trait_type":"Genre",
+            "value":"Adventure"
+        },
+        {
+            "trait_type":"Original Language",
+            "value":"Chinese"
+        },
+        {
+            "trait_type":"Producer #1",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Producer #2",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Producer #3",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Producer #4",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Cast #1",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Cast #2",
+            "value":"Julien"
+        },
+        {
+            "trait_type":"Cast #3",
+            "value":"Julien"
+        }
+    ],
+    "license_details":[
+        {
+            "right":"exclusivity",
+            "value":"false"
+        },
+        {
+            "right":"privateUse",
+            "value":"true"
+        },
+        {
+            "right":"displayOnMarketplaces",
+            "value":"true"
+        },
+        {
+            "right":"displayOnEveryMediaNonCommercial",
+            "value":"true"
+        },
+        {
+            "right":"rightToAdapt",
+            "value":"false"
+        },
+        {
+            "right":"rightToAddALogo",
+            "value":"false"
+        },
+        {
+            "right":"merchandisingRights",
+            "value":"false"
+        }
+    ]
+ }

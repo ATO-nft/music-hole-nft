@@ -69,11 +69,9 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 
 	/// @notice only owner can mint without paying
 	function adminMint(uint256 _amount)
-		payable
 		public
 		onlyOwner
 	{
-		require(msg.value == 0, "CANNOT_SEND_ANY_VALUE");
 		for(uint256 i=0 ; i<_amount ; i++) 
 		{
 			_tokenIdCounter.increment();

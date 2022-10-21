@@ -5,11 +5,12 @@ import fs from 'fs';
 
 async function main() {
 
-  const name = "Music Hole";
-  const symbol = "MH";
-  const metadataContent = fs.readFileSync(__dirname + "/metatest.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
-  const royalties = 10 * 100; // 10% resale rights
-  const price:any = ethers.utils.parseEther('1') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
+  const name = "Thistle";
+  const symbol = "THISTLE";
+  // const metadataContent = fs.readFileSync(__dirname + "/metatest.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
+  const metadataContent = "https://bafybeidskqwky4c4rl4ncrcoe3qeybuyrspg5qvfyj3tevh6ceeo3cpayq.ipfs.w3s.link/metatest.json"
+  const royalties = 8 * 100; // 10% resale rights
+  const price:any = ethers.utils.parseEther('0.00001') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
 
   const MusicHole = await ethers.getContractFactory("MusicHole");
   const mh = await MusicHole.deploy(name, symbol, metadataContent, royalties, price);
