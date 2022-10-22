@@ -5,9 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import './ERC2981ContractWideRoyalties.sol';
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import './ERC2981ContractWideRoyalties.sol';
 
 /// @title Music Hole NFT contract
 contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981ContractWideRoyalties, ReentrancyGuard {
@@ -16,6 +16,7 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 	Counters.Counter private _tokenIdCounter;
 
 	uint256 public price;
+	uint256 public max;
 	string public uri;
 
 	/// @notice constructor
@@ -29,13 +30,15 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 		string memory _symbol,
 		string memory _uri,
 		uint256 _royalties,
-		uint _price
+		uint256 _price,
+		uint256 _max
 	)
 	ERC721(_name, _symbol)
 	{
 		uri = _uri;
 		_setRoyalties(owner(), _royalties);
 		setPrice(_price);
+		max = _max;
 	}
 
 	receive() external payable {
@@ -61,6 +64,7 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 		nonReentrant
 	{
 		require(msg.value == price, "MSG_VALUE_DOES_NOT_MATCH_PRICE");
+		require(_tokenIdCounter.current() < max, "CANNOT_MINT_MORE_THAN_MAX");
 		_tokenIdCounter.increment();
 		_safeMint(msg.sender, _tokenIdCounter.current());
 		_setTokenURI(_tokenIdCounter.current(), uri);
@@ -74,6 +78,7 @@ contract MusicHole is ERC721, ERC721URIStorage, ERC721Burnable, Ownable, ERC2981
 	{
 		for(uint256 i=0 ; i<_amount ; i++) 
 		{
+			require(_tokenIdCounter.current() < max, "CANNOT_MINT_MORE_THAN_MAX");
 			_tokenIdCounter.increment();
 			_safeMint(msg.sender, _tokenIdCounter.current());
 			_setTokenURI(_tokenIdCounter.current(), uri);

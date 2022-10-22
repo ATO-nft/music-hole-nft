@@ -15,12 +15,13 @@ describe("Music Hole NFT Contract", function () {
     const metadataContent = fs.readFileSync(__dirname + "/metadata.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
     const royalties = 10 * 100; // 10% resale rights
     const price:any = ethers.utils.parseEther('1') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
+    const max:any = 10;
 
     // Create instance of Ato.sol
     const MusicHole = await ethers.getContractFactory("MusicHole");
-    const mh = await MusicHole.deploy(name, symbol, metadataContent, royalties, price);
+    const mh = await MusicHole.deploy(name, symbol, metadataContent, royalties, price, max);
     await mh.deployed();
-    return { issuer, acquirer, mh, name, symbol, royalties, price, metadataContent };
+    return { issuer, acquirer, mh, name, symbol, royalties, price, metadataContent, max };
   }
 
   describe("Deployment", function () {
@@ -74,7 +75,15 @@ describe("Music Hole NFT Contract", function () {
       const { mh, issuer, price } = await loadFixture(deployContractsFixture);
       await mh.connect(issuer).adminMint(2);
       expect(await mh.balanceOf(issuer.address)).to.be.equal(2);
-      expect(mh.connect(issuer).adminMint(2,{value: ethers.utils.parseEther('1')})).to.be.revertedWith('CANNOT_SEND_ANY_VALUE');
+      expect(mh.connect(issuer).adminMint(2)).to.be.revertedWith('CANNOT_SEND_ANY_VALUE');
+    });
+    it("Should revert when reach id #9999", async function () {
+      const { mh, issuer, acquirer, price, max } = await loadFixture(deployContractsFixture);
+      await mh.connect(acquirer).mint( {value: price});
+      await mh.connect(issuer).adminMint(max-2);
+      expect(await mh.balanceOf(issuer.address)).to.be.equal(max-2);
+      expect( mh.connect(issuer).adminMint(1)).to.be.revertedWith('CANNOT_MINT_MORE_THAN_MAX');
+      expect( mh.connect(acquirer).mint({value: price})).to.be.revertedWith('CANNOT_MINT_MORE_THAN_MAX');
     });
   });
 });
