@@ -7,17 +7,15 @@ describe("Music Hole NFT Contract", function () {
 
   async function deployContractsFixture() {
 
-    // Create signers
     const [issuer, acquirer] = await ethers.getSigners();
 
     const name = "Music Hole";
     const symbol = "MH";
-    const metadataContent = fs.readFileSync(__dirname + "/metadata.json", {encoding:'utf8', flag:'r'}); // https://codebeautify.org/jsonminifier
+    const metadataContent = "https://bafybeidskqwky4c4rl4ncrcoe3qeybuyrspg5qvfyj3tevh6ceeo3cpayq.ipfs.w3s.link/metatest.json";
     const royalties = 10 * 100; // 10% resale rights
     const price:any = ethers.utils.parseEther('1') ; // https://bobbyhadz.com/blog/typescript-type-has-no-properties-in-common-with-type
     const max:any = 10;
 
-    // Create instance of Ato.sol
     const MusicHole = await ethers.getContractFactory("MusicHole");
     const mh = await MusicHole.deploy(name, symbol, metadataContent, royalties, price, max);
     await mh.deployed();
